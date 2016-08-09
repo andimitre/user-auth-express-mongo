@@ -10,8 +10,7 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
         a.nav-item.nav-link(href='about') About
         a.nav-item.nav-link(href='contact') Contact
         a.nav-item.nav-link(href='profile') My Profile
-
+      if(!user)
         a.btn.btn-info.pull-md-right(href='login') Login
-
-      if currentUser
+      else 
         a.btn.btn-info.pull-md-right(href='login') Logout

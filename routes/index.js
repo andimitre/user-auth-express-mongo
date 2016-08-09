@@ -22,22 +22,22 @@ router.get('/logout', function(req, res, next){
 });
 // post login
 router.post('/login', function(req, res, next){
-  if (req.body.email && req.body.password) {
-    User.authenticate(req.body.email, req.body.password, function(error, user){
-      if (error){
-        var err= new Error('Wrong email or password.');
-        err.status = 401; // authorized
-        return next(err);
-      } else {
-        req.session.userId = user._id;
-        return res.redirect('/profile');
-      }
-    });
-  } else {
-    var err= new Error('All Fields are required.');
-    err.status = 401; // authorized
-    return next(err);
-  }
+  // if (req.body.email && req.body.password) {
+  //   User.authenticate(req.body.email, req.body.password, function(error, user){
+  //     if (error){
+  //       var err= new Error('Wrong email or password.');
+  //       err.status = 401; // authorized
+  //       return next(err);
+  //     } else {
+  //       req.session.userId = user._id;
+  //       return res.redirect('/profile');
+  //     }
+  //   });
+  // } else {
+  //   var err= new Error('All Fields are required.');
+  //   err.status = 401; // authorized
+  //   return next(err);
+  // }
 });
 
 // GET /
@@ -62,14 +62,20 @@ router.get('/register', mid.loggedOut, function(req, res, next){
 });
 
 router.get('/profile', function(req, res, next){
-  if (!req.session.userId) {
-    var err= new Error('No Access.Please login.');
-    err.status = 401;
-    return next(err);
+  // if (!req.session.userId) {
+  //   var err= new Error('No Access.Please login.');
+  //   err.status = 401;
+  //   return next(err);
+  // } else {
+  //   User.findById(req.session.userId).exec(function(error, user){
+  //     return res.render('profile', { title: 'Profile', name: user.name, favorite: user.favoriteBook});
+  //   });
+  // }
+  // passport returns a user object in the request so
+  if(req.user) {
+    res.render('profile', {title: 'Profile', user: req.user});
   } else {
-    User.findById(req.session.userId).exec(function(error, user){
-      return res.render('profile', { title: 'Profile', name: user.name, favorite: user.favoriteBook});
-    });
+    res.redirect('/login');
   }
 });
 

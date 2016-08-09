@@ -16,12 +16,14 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true
-  },
-  password: {
-    type: String,
-    required: true,
-    trim: true
   }
+  // removing password for passport auth
+  // ,
+  // password: {
+  //   type: String,
+  //   required: true,
+  //   trim: true
+  // }
 });
 // authenticate input against the db
 UserSchema.statics.authenticate = function(email, password, callback){

@@ -16,6 +16,8 @@
     "mongoose": "^4.5.0",
     "node-gyp": "^3.4.0",
     "nodemon": "^1.10.0",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
     "pug": "^2.0.0-beta2",
     "rebuild": "^0.1.2"
   },
